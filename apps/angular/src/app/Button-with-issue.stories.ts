@@ -1,14 +1,19 @@
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { applicationConfig, type Meta, type StoryObj } from '@storybook/angular/';
+import { type Meta, type StoryObj } from '@storybook/angular/';
+import { TEST } from '../main';
 import ButtonComponent from './button-with-issue.component';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
-  decorators: [
-    applicationConfig({
-      providers: [provideAnimations()]
-    })
-  ]
+  render: () => ({
+    applicationConfig: {
+      providers: [{ provide: TEST, useValue: 'test' }],
+    },
+  }),
+  // decorators: [
+  //   applicationConfig({
+  //     providers: [{ provide: TEST, useValue: 'test' }],
+  //   }),
+  // ],
 };
 
 export default meta;

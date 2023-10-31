@@ -1,6 +1,17 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import { InjectionToken } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import {
+  provideRouter,
+  withEnabledBlockingInitialNavigation,
+} from '@angular/router';
+import { AppComponent } from './app/app.component';
+import { appRoutes } from './app/app.routes';
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+export const TEST = new InjectionToken('test');
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    { provide: TEST, useValue: 'toto' },
+  ],
+}).catch((err) => console.error(err));
